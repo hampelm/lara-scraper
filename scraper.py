@@ -14,10 +14,13 @@ import urllib2
 
 base = 'http://www.dleg.state.mi.us/bcs_corp/dt_corp.asp?id_nbr='
 
-# ------------------------------------------------------
-# First, get all the businesses _without_ a prefix
-
+# ------------------------------------------------------------------------------
+# First, get all the businesses _without_ a letter prefix or suffix.
+#
 # Print out which files we've already completed.
+# We'll start scraping at the next file in line.
+# This is useful because the DLEG server goes down nightly, so the scraper
+# will crash and you'll have to restart it the next day.
 try:
     start = 0
     done = os.listdir('html')
@@ -55,14 +58,11 @@ for num in range(start,1000000):
         f.close()
 
 
-# ------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Now, deal with trailing letter businesses, eg 10000A
 start = 1
 
 # Check what we've processed so far
-# We'll start scraping at the next file in line.
-# This is useful because the DLEG server goes down nightly, so the scraper
-# will crash and you'll have to restart it the next day.
 done = os.listdir('html')
 done = sorted(done)
 
@@ -106,4 +106,6 @@ for num in range(start,99999):
             f.write(r.text)
             f.close()
 
+# ------------------------------------------------------------------------------
 # TODO: Check all the businesses with suffixes _AND_ prefixes.
+# Now, deal with trailing letter businesses, eg B9000T
