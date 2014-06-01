@@ -1,6 +1,9 @@
 # You got cookie.
 # So share it maybe?
 
+# This script scrapes Michigan business license records page by HMTL page
+# and saves them locally for later processing. 
+
 # env: business
 from bs4 import BeautifulSoup
 
